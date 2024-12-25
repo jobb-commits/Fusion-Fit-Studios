@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FusionFit Studios - Multi-Step Form</title>
+    <link rel="stylesheet" href="FusionFit.css">
+    <style>
+        body {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: Arial, sans-serif;
+            line-height: 1.5;
+            min-height: 100vh;
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            margin: 0;
+        }
+
+        .main {
+            background-color: #fff;
+            border-radius: 15px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+            padding: 10px 20px;
+            transition: transform 0.2s;
+            width: 500px;
+            text-align: center;
+        }
+
+        h1 {
+            color: rgb(145, 97, 97);
+        }
+
+        label {
+            display: block;
+            width: 100%;
+            margin-top: 10px;
+            margin-bottom: 5px;
+            text-align: left;
+            color: #3A3B3B;
+            font-weight: bold;
+        }
+
+        input {
+            display: block;
+            width: 100%;
+            margin-bottom: 15px;
+            padding: 10px;
+            box-sizing: border-box;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+
+        button {
+            padding: 15px;
+            border-radius: 10px;
+            margin-top: 15px;
+            margin-bottom: 15px;
+            border: none;
+            color: white;
+            cursor: pointer;
+            background-color: #3A3B3B;
+            width: 100%;
+            font-size: 16px;
+        }
+
+        .wrap {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .form-step {
+            display: none;  /* Hide all steps by default */
+            opacity: 0;
+            transition: opacity 0.5s ease-in-out;
+        }
+
+        .form-step.active {
+            display: block;  /* Show the active step */
+            opacity: 1;
+        }
+
+        #bmi-result {
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+
+    <form id="multi-step-form">
+        <div class="main">
+            <h1>FusionFit Studios</h1>
+
+            <!-- Step 1: Personal Information -->
+            <div class="form-step active" id="step1">
+                <h3>Personal Information</h3>
+                <label for="first">Full Name:</label>
+                <input type="text" id="first" name="first" placeholder="Please Enter Your Full Name" required>
+
+                <label for="age">Date of Birth:</label>
+                <input type="date" id="age" name="age" placeholder="Please Enter Your Date of Birth" required>
+
+                <label for="gender">Gender:</label>
+                <input type="text" id="gender" name="gender" placeholder="Please Enter Your Gender" required>
+
+                <label for="Contact">Phone Number:</label>
+                <input type="tel" id="Contact" name="Contact" placeholder="Enter Phone Number" required>
+
+                <label for="Emergency">Emergency Contact:</label>
+                <input type="tel" id="Emergency" name="Emergency" placeholder="Enter Emergency Contact" required>
+
+                <div class="wrap">
+                    <button type="button" class="next-btn" onclick="nextStep()">Next</button>
+                </div>
+            </div>
+
+            <!-- Step 2: Fitness Goals -->
+            <div class="form-step" id="step2">
+                <h3>Current Fitness Goals</h3>
+                <input type="checkbox" id="goal1" name="goal1" value="Weight Loss">
+                <label for="goal1">Weight Loss</label><br>
+
+                <input type="checkbox" id="goal2" name="goal2" value="Muscle Gain">
+                <label for="goal2">Muscle Gain</label><br>
+
+                <input type="checkbox" id="goal3" name="goal3" value="Endurance">
+                <label for="goal3">Improve Endurance</label><br>
+
+                <input type="checkbox" id="goal4" name="goal4" value="Manage Stress">
+                <label for="goal4">Manage Stress</label><br>
+
+                <input type="checkbox" id="goal5" name="goal5" value="Cardio">
+                <label for="goal5">Enhance Cardiovascular Health</label><br>
+
+                <div class="wrap">
+                    <button type="button" class="prev-btn" onclick="prevStep()">Previous</button>
+                    <button type="button" class="next-btn" onclick="nextStep()">Next</button>
+                </div>
+            </div>
+
+            <!-- Step 3: Fitness Level -->
+            <div class="form-step" id="step3">
+                <h3>Specify Your Current Level of Fitness</h3>
+                <input type="radio" id="beginner" name="fitness_level" value="Beginner">
+                <label for="beginner">Beginner</label><br>
+
+                <input type="radio" id="intermediate" name="fitness_level" value="Intermediate">
+                <label for="intermediate">Intermediate</label><br>
+
+                <input type="radio" id="advanced" name="fitness_level" value="Advanced">
+                <label for="advanced">Advanced</label><br>
+
+                <label for="frequency">Workout Frequency:</label>
+                <input type="text" id="frequency" name="frequency" placeholder="How Often Do You Exercise" required>
+
+                <label for="preference">Workout Preference:</label>
+                <input type="text" id="preference" name="preference" placeholder="What Exercise Do You Enjoy" required>
+
+                <div class="wrap">
+                    <button type="button" class="prev-btn" onclick="prevStep()">Previous</button>
+                    <button type="button" class="next-btn" onclick="nextStep()">Next</button>
+                </div>
+            </div>
+
+            <!-- Step 4: Health and Diet -->
+            <div class="form-step" id="step4">
+                <h3>Health and Diet</h3>
+                <label for="height">Height (cm):</label>
+                <input type="number" id="height" name="height" placeholder="Enter Your Height" required>
+
+                <label for="weight">Weight (kg):</label>
+                <input type="number" id="weight" name="weight" placeholder="Enter Your Weight" required>
+
+                <label for="miscellaneous">Health Conditions:</label>
+                <input type="text" id="miscellaneous" name="miscellaneous" placeholder="Specify Any Underlying Health Conditions">
+
+                <div id="bmi-result" class="bmi-result"></div>
+
+                <div class="wrap">
+                    <button type="button" class="prev-btn" onclick="prevStep()">Previous</button>
+                    <button type="submit" class="next-btn">Submit</button>
+                </div>
+            </div>
+        </div>
+    </form>
+
+    <script>
+        let currentStep = 0;
+        const formSteps = document.querySelectorAll(".form-step");
+
+        function showStep(step) {
+            formSteps.forEach((stepElement, index) => {
+                stepElement.classList.remove("active");
+                if (index === step) {
+                    stepElement.classList.add("active");
+                }
+            });
+        }
+
+        function nextStep() {
+            if (currentStep < formSteps.length - 1) {
+                currentStep++;
+                showStep(currentStep);
+            }
+        }
+
+        function prevStep() {
+            if (currentStep > 0) {
+                currentStep--;
+                showStep(currentStep);
+            }
+        }
+
+        function calculateBMI() {
+            const height = document.getElementById("height").value;
+            const weight = document.getElementById("weight").value;
+
+            if (height && weight) {
+                const bmi = (weight / ((height / 100) ** 2)).toFixed(2);
+                document.getElementById("bmi-result").innerText = `Your BMI is ${bmi}`;
+            }
+        }
+
+        document.getElementById("height").addEventListener("input", calculateBMI);
+        document.getElementById("weight").addEventListener("input", calculateBMI);
+
+        // Initially show the first step
+        showStep(currentStep);
+    </script>
+
+</body>
+</html>
